@@ -140,3 +140,8 @@ span{
 span:hover{
     color: #06b6d4;;
 }
+
+/* books btns */
+.readBook{
+    filter:opacity(0.5);
+}
