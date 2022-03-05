@@ -56,8 +56,8 @@ function createBookBtns(){
     let bookBtns = document.createElement("div");
     readIcon.setAttribute("src","./assets/read-on.png");
     readIcon.setAttribute("alt","read");
-    deleteIcon.setAttribute("src","/assets/delete.png");
-    deleteIcon.setAttribute("alt","delte");
+    deleteIcon.setAttribute("src","./assets/delete.png");
+    deleteIcon.setAttribute("alt","delete");
     bookBtns.appendChild(readIcon);
     bookBtns.appendChild(deleteIcon);
     readIcon.addEventListener("click",()=>{
