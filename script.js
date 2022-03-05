@@ -8,9 +8,9 @@ const authorInput = document.querySelector("input[name='author']");
 const pagesInput = document.querySelector("input[name='pages']");
 const readInput = document.querySelector("select[name='read']");
 const addMessage = document.getElementById("addMessage")
-let myLibrary = [{title:"Lord of the rings",author:"J.R.R. Tolkien",pages:423, read:true, index:0},
-{title:"The Call of Cthulhu",author:"H. P. Lovecraft",pages:420, read:false,index:1},
-{title:"Project Hail Mary",author:"Andy Weir",pages:457, read:true,index:2}];
+let myLibrary = [{title:"Lord of the rings",author:"J.R.R. Tolkien",pages:423, read:true},
+{title:"The Call of Cthulhu",author:"H. P. Lovecraft",pages:420, read:false},
+{title:"Project Hail Mary",author:"Andy Weir",pages:457, read:true}];
 
 function Book(title,author,pages,read,index){
     this.title = title;
@@ -38,7 +38,9 @@ function displayBooks(){
         let btndiv = createBookBtns();
         div.classList.add("book");
         par.innerText = `${book.title} by ${book.author},${book.pages} pages,${book.read == true ? "read":"not read yet"}`;
-        divindex.textContent = book.index;
+        console.log(book)
+        divindex.textContent = myLibrary.findIndex(object => {
+            return object.title === book.title;});
         divindex.style.display = "none";
         div.appendChild(divindex);
         div.appendChild(par);
@@ -62,7 +64,7 @@ function createBookBtns(){
         readIcon.classList.toggle("readBook");
         console.log(readIcon.parentElement.parentElement.firstChild.textContent);
         myLibrary.forEach(book=>{
-            if (book.index == readIcon.parentElement.parentElement.firstChild.textContent){
+            if (myLibrary.indexOf(book) == readIcon.parentElement.parentElement.firstChild.textContent){
                 book.read == true ? book.read=false:book.read=true;
             }
         })
@@ -70,8 +72,8 @@ function createBookBtns(){
     })
     deleteIcon.addEventListener("click",()=>{
         myLibrary.forEach(book=>{
-            if (book.index == deleteIcon.parentElement.parentElement.firstChild.textContent){
-                myLibrary.splice(book.index,1);
+            if (myLibrary.indexOf(book) == deleteIcon.parentElement.parentElement.firstChild.textContent){
+                myLibrary.splice(myLibrary.indexOf(book),1);
             }
         })
         displayBooks();
