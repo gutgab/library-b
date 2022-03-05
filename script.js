@@ -68,6 +68,14 @@ function createBookBtns(){
         })
         displayBooks();
     })
+    deleteIcon.addEventListener("click",()=>{
+        myLibrary.forEach(book=>{
+            if (book.index == deleteIcon.parentElement.parentElement.firstChild.textContent){
+                myLibrary.splice(book.index,1);
+            }
+        })
+        displayBooks();
+    })
     return bookBtns;
 }
 addBtn.addEventListener("click",()=>{
@@ -75,7 +83,10 @@ addBtn.addEventListener("click",()=>{
 })
 addBookBtn.addEventListener("click",()=>{
     if(titleInput.value.length>2&&titleInput.value.length<30&&authorInput.value.length>2&&authorInput.value.length<30&&parseInt(pagesInput.value)>0){
-        addBook(titleInput.value,authorInput.value,pagesInput.value,readInput.value== 'true' ? true:false,myLibrary[myLibrary.length-1].index+1);
+        let readStatus;
+        if (myLibrary.length==0){readStatus = 0;}
+        else readStatus=myLibrary[myLibrary.length-1].index+1;
+        addBook(titleInput.value,authorInput.value,pagesInput.value,readInput.value== 'true' ? true:false,readStatus);
         displayBooks();
         modal.style.display = "none";
         titleInput.value="";
